@@ -1,63 +1,36 @@
-name: Java CI with Maven
+name: Maven Build and Test
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v4
-    
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
       with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
-    
-    - name: Verify lib directory
-      run: |
-        mkdir -p lib
-        # Check if LinkedIntQueue.jar exists, if not create a placeholder
-        if [ ! -f lib/LinkedIntQueue.jar ]; then
-          echo "Warning: LinkedIntQueue.jar not found, creating empty placeholder"
-          touch lib/LinkedIntQueue.jar
-        fi
-    
+        java-version: '11'
+
+    - name: Cache Maven dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/*.java') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
     - name: Build with Maven
-      run: mvn -B package
-    
-    - name: Run tests and generate coverage report
-      run: mvn test jacoco:report
-    
-    - name: Generate site with test and coverage reports
-      run: mvn site
-    
-    - name: Archive test results
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: |
-          target/surefire-reports/
-          target/site/
-        retention-days: 7
-    
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: jar-artifact
-        path: target/*.jar
-        retention-days: 7
-    
-    - name: Archive coverage reports
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-reports
-        path: target/site/jacoco/
-        retention-days: 7
+      run: mvn clean install
+
+    - name: Run tests with Maven
+      run: mvn test
