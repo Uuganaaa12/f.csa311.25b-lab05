@@ -39,4 +39,3 @@ jobs:
 
     - name: Run tests with Maven
       run: mvn test
-      working-directory: Java
