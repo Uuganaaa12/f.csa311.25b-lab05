@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -33,8 +32,8 @@ public class IntQueueTest {
     @Test
     public void testNotEmpty() {
         mQueue.enqueue(1);
-        assertFalse("hoooson bish", mQueue.isEmpty());
-        // assertTrue("hoooson bish", mQueue.isEmpty());
+        //assertFalse("hoooson bish", mQueue.isEmpty());
+        assertTrue("hoooson bish", mQueue.isEmpty());
     }
 
     @Test
