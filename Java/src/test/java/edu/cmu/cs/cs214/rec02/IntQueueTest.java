@@ -33,8 +33,8 @@ public class IntQueueTest {
     @Test
     public void testNotEmpty() {
         mQueue.enqueue(1);
-        //assertFalse("element nemsnii daraa hooson bish bolno", mQueue.isEmpty());
-        assertFalse("fefef", mQueue.isEmpty());
+        // assertFalse("hoooson bish", mQueue.isEmpty());
+        assertTrue("hoooson bish", mQueue.isEmpty());
     }
 
     @Test
@@ -101,7 +101,8 @@ public class IntQueueTest {
         for (int i = 0; i < 10; i++) {
             assertTrue(mQueue.enqueue(i));
             assertEquals("size 1 bolno", 1, mQueue.size());
-            assertEquals("daraalliin element daraalald orson elementtai tohiroh ystoi", Integer.valueOf(i), mQueue.dequeue());
+            assertEquals("daraalliin element daraalald orson elementtai tohiroh ystoi", Integer.valueOf(i),
+                    mQueue.dequeue());
             assertTrue("hassanii daraa hooson bolno", mQueue.isEmpty());
         }
     }
@@ -111,15 +112,15 @@ public class IntQueueTest {
         for (int i = 0; i < 8; i++) {
             mQueue.enqueue(i);
         }
-        
+
         for (int i = 0; i < 4; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
-        
+
         for (int i = 8; i < 12; i++) {
             mQueue.enqueue(i);
         }
-        
+
         for (int i = 4; i < 12; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
@@ -131,7 +132,7 @@ public class IntQueueTest {
             mQueue.enqueue(i);
         }
         assertEquals(10, mQueue.size());
-        
+
         mQueue.clear();
         assertTrue(mQueue.isEmpty());
         assertEquals(0, mQueue.size());
@@ -143,15 +144,15 @@ public class IntQueueTest {
         for (int i = 0; i < 10; i++) {
             mQueue.enqueue(i);
         }
-        
+
         for (int i = 0; i < 5; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
-        
+
         for (int i = 10; i < 15; i++) {
             mQueue.enqueue(i);
         }
-        
+
         for (int i = 5; i < 15; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
@@ -162,10 +163,10 @@ public class IntQueueTest {
         for (int i = 0; i < 10; i++) {
             assertTrue(mQueue.enqueue(i));
         }
-        
+
         assertTrue(mQueue.enqueue(10));
         assertEquals(11, mQueue.size());
-        
+
         for (int i = 0; i < 11; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
@@ -176,7 +177,7 @@ public class IntQueueTest {
         assertNull(mQueue.peek());
         assertNull(mQueue.dequeue());
         assertTrue(mQueue.isEmpty());
-        
+
         assertTrue(mQueue.enqueue(Integer.MAX_VALUE));
         assertTrue(mQueue.enqueue(Integer.MIN_VALUE));
         assertEquals(Integer.valueOf(Integer.MAX_VALUE), mQueue.dequeue());
@@ -188,11 +189,11 @@ public class IntQueueTest {
         for (int i = 0; i < 5; i++) {
             mQueue.enqueue(i);
         }
-        
+
         for (int i = 0; i < 5; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
-        
+
         assertNull(mQueue.dequeue());
         assertTrue(mQueue.isEmpty());
         assertEquals(0, mQueue.size());
@@ -203,9 +204,9 @@ public class IntQueueTest {
         for (int i = 0; i < 25; i++) {
             assertTrue(mQueue.enqueue(i));
         }
-        
+
         assertEquals(25, mQueue.size());
-        
+
         for (int i = 0; i < 25; i++) {
             assertEquals(Integer.valueOf(i), mQueue.dequeue());
         }
