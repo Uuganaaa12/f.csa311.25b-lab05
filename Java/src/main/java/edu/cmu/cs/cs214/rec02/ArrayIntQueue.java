@@ -15,29 +15,14 @@ import java.util.Arrays;
  */
 public class ArrayIntQueue implements IntQueue {
 
-    /**
-     * An array holding this queue's data
-     */
     private int[] elementData;
 
-    /**
-     * Index of the next dequeue-able value
-     */
     private int head;
 
-    /**
-     * Current size of queue
-     */
     private int size;
 
-    /**
-     * The initial size for new instances of ArrayQueue
-     */
     private static final int INITIAL_SIZE = 10;
 
-    /**
-     * Constructs an empty queue with an initial capacity of ten.
-     */
     public ArrayIntQueue() {
         elementData = new int[INITIAL_SIZE];
         head = 0;
@@ -56,11 +41,13 @@ public class ArrayIntQueue implements IntQueue {
         if (isEmpty()) {
             return null;
         }
-        Integer value = elementData[head];
+        Integer value = elementData[head]; 
+        elementData[head] = 0; 
         head = (head + 1) % elementData.length;
         size--;
         return value;
     }
+    
 
     /** {@inheritDoc} */
     public boolean enqueue(Integer value) {
@@ -82,36 +69,29 @@ public class ArrayIntQueue implements IntQueue {
         if (isEmpty()) {
             return null;
         }
-        return elementData[head];
+        return Integer.valueOf(elementData[head]);
     }
-
+    
     // public Integer peek() {
     //     return elementData[head];
-    // }  
+    // }  iim baisan
 
     /** {@inheritDoc} */
     public int size() {
         return size;
     }
-    
 
-    /**
-     * Increases the capacity of this <tt>ArrayIntQueue</tt> instance, if
-     * necessary, to ensure that it can hold at least size + 1 elements.
-     */
     private void ensureCapacity() {
         if (size == elementData.length) {
-            int oldCapacity = elementData.length;
-            int newCapacity = 2 * oldCapacity + 1;
+            int newCapacity = 2 * elementData.length + 1;
             int[] newData = new int[newCapacity];
-            for (int i = head; i < oldCapacity; i++) {
-                newData[i - head] = elementData[i];
-            }
-            for (int i = 0; i < head; i++) {
-                newData[oldCapacity - head + i] = elementData[i];
+            for (int i = 0; i < size; i++) {
+                newData[i] = elementData[(head + i) % elementData.length];
             }
             elementData = newData;
             head = 0;
         }
-    }
+    }   
+    
+    
 }
